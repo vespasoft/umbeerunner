@@ -1,5 +1,6 @@
 package com.umbeerunner.android.umbeerunner.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,10 +13,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.umbeerunner.android.umbeerunner.R;
+import com.umbeerunner.android.umbeerunner.util.GPSTracker;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
+
+    private GoogleMap mMap;
+
+    // Might be null if Google Play services APK is not available.
+    private LatLng LOCATION_MARKER = new LatLng(0, 0);
+    private static final LatLngBounds BOUNDS = new LatLngBounds(
+            new LatLng(-0, 0), new LatLng(0, 0));
+    private GPSTracker gps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +59,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
     }
 
     @Override
@@ -89,5 +112,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void setCurrentLocation() {
+
+        // Check if we were successful in obtaining the map.
+        if (mMap != null) {
+            // create class object
+            gps = new GPSTracker(this);
+            // check if GPS enabled
+            if (gps.canGetLocation()) {
+                // se configura el tipo de mapa por default
+                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                // se crea un LatLng object for the current location (Contiene la ubicacion actual)
+                LOCATION_MARKER = new LatLng(gps.getLatitude(), gps.getLongitude());
+
+                mMap.addMarker(new MarkerOptions().position(LOCATION_MARKER).title("Aqui Estoy"));
+
+                // movemos la camara del mapa a la ubicación actual del usuario
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LOCATION_MARKER, 17));
+            }
+
+        }
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        setCurrentLocation();
     }
 }

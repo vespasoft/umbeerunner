@@ -30,6 +30,7 @@
     <string name="prompt_useremail">Email del usuario</string>
     <string name="prompt_userpassword">Inserte una clave</string>
     <string name="prompt_usertype">Tipo de usuario</string>
+    <string name="title_activity_maps">Map</string>
 
 
 </resources>
