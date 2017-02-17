@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_start"
+            android:title="Iniciar Carrera" />
+        <item
+            android:id="@+id/nav_end"
+            android:title="Finalizar Carrera" />
+        <item
+            android:id="@+id/nav_history"
+            android:title="Historico" />
+        <item
+            android:id="@+id/nav_exit"
+            android:title="Salir" />
+    </group>
+
+</menu>

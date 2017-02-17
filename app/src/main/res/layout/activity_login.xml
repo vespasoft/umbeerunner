@@ -1,0 +1,182 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="@color/windowBackground"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    tools:context=".ui.LoginActivity">
+
+    <include
+        android:id="@+id/toolbarLogin"
+        layout="@layout/app_bar_login"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
+
+    <!-- Login progress -->
+    <ProgressBar
+        android:id="@+id/login_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone" />
+
+    <!-- Objeto con Scroll -->
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/login_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/app_bar"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:id="@+id/email_login_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/relativeLayoutEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="2dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp">
+
+                <ImageView
+                    android:id="@+id/imageViewEmail"
+                    android:layout_width="35dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:adjustViewBounds="true"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_transparent" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/imageViewEmail"
+                    android:layout_alignTop="@+id/imageViewEmail"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toEndOf="@+id/imageViewEmail"
+                    android:layout_toRightOf="@+id/imageViewEmail" >
+
+                    <AutoCompleteTextView
+                        android:id="@+id/email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/windowBackground"
+                        android:layout_alignBottom="@+id/imageViewEmail"
+                        android:layout_alignTop="@+id/imageViewEmail"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toEndOf="@+id/imageViewEmail"
+                        android:layout_toRightOf="@+id/imageViewEmail"
+                        android:ems="10"
+                        android:textColorHint="@color/textColorPrimary"
+                        android:text=""
+                        android:textColor="@color/textColorPrimary"
+                        android:hint="@string/prompt_email"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+                        android:singleLine="true" />
+
+                </android.support.design.widget.TextInputLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativeLayoutPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/relativeLayoutEmail"
+                android:layout_marginBottom="2dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp">
+
+                <ImageView
+                    android:id="@+id/imageViewPass"
+                    android:layout_width="35dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:adjustViewBounds="true"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_transparent" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/imageViewPass"
+                    android:layout_alignTop="@+id/imageViewPass"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toEndOf="@+id/imageViewPass"
+                    android:layout_toRightOf="@+id/imageViewPass">
+
+                    <EditText
+                        android:id="@+id/password"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/windowBackground"
+                        android:layout_alignBottom="@+id/imageViewPass"
+                        android:layout_alignTop="@+id/imageViewPass"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toEndOf="@+id/imageViewPass"
+                        android:layout_toRightOf="@+id/imageViewPass"
+                        android:ems="10"
+                        android:inputType="textPassword"
+                        android:hint="@string/prompt_password"
+                        android:textColorHint="@color/textColorPrimary"
+                        android:text=""
+                        android:textColor="@color/textColorPrimary"
+                        android:imeActionId="@+id/login"
+                        android:imeActionLabel="@string/action_sign_in_short"
+                        android:imeOptions="actionUnspecified"
+                        android:maxLines="1"
+                        android:singleLine="true" />
+
+                </android.support.design.widget.TextInputLayout>
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/email_sign_in_button"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/action_sign_in"
+                android:background="@color/colorAccent"
+                android:textColor="@color/color_white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewCreateAccount"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:padding="30dp"
+                android:ems="14"
+                android:text="@string/action_create_account"
+                android:textColor="@color/textColorPrimary" />
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+</LinearLayout>
